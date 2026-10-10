@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+:root {
+    --darkest-color: #061313;
+    --dark-grey: #0b1b38;
+    --grey: #471c24;
+    --grey-blue: #153e70;
+    --grey-red: #992b2b;
+    --grey-pink: #9e6976;
+    --turquoise-hover: #a2c3c0;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Outfit", sans-serif;
+
+    color: var(--grey-pink);
+}
+
+body {
+    background-color: var(--grey);
+}
+
+.ToDoUp {
+    max-width: 900px;
+    padding: 40px 10px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    h1 {
+        font-size: 3.5rem;
+    }
+}
+
+.addTaskForm {
+    display: flex;
+    gap: 20px;
+    padding: 30px 0;
+
+    input {
+        width: 100%;
+        font-size: 2rem;
+        padding: 20px;
+        border: 0;
+        border-radius: 20px;
+        background-color: var(--grey-pink);
+        color: white;
+        font-weight: 600;
+    }
+
+    input::placeholder {
+        color: var(--grey);
+    }
+
+    input:focus {
+        outline: 0;
+    }
+
+    button {
+        background-color: white;
+        color: var(--darkest-color);
+        font-size: 2rem;
+        padding: 20px;
+        font-weight: 700;
+        border: 0;
+        border-radius: 17px;
+        cursor: pointer;
+        transition: background-color 0.2s ease-out, transform 0.2s ease-out;
+    }
+
+    button:hover {
+        background-color: var(--turquoise-hover);
+        transform: scale(1.05);
+    }
+}
+
+.toDoList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    list-style: none;
+    margin-top: 50px;
+
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        background-color: var(--dark-grey);
+        color: var(--turquoise-hover);
+        font-size: 1.8rem;
+        font-weight: 600;
+        border-radius: 10px;
+
+        transition: all 0.5s ease;
+
+        span {
+            max-width: 80%;
+            word-break: break-all;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            transition: all 0.5s ease;
+        }
+
+        span:hover {
+            white-space: normal;
+            /* Разрешаем перенос строк */
+            overflow: visible;
+            /* Показываем весь текст */
+            width: auto;
+            /* Позволяет блоку подстроиться под контент */
+            transform: scale(1);
+        }
+
+        .removeBtn {
+            background-color: rgb(250, 4, 4);
+            color: var(--darkest-color);
+            font-size: 1.3rem;
+            padding: 10px;
+            font-weight: 600;
+            border: 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-out, transform 0.2s ease-out;
+        }
+
+        .removeBtn:hover {
+            background-color: var(--turquoise-hover);
+            transform: scale(1.05);
+        }
+    }
+
+    li:hover {
+        transform: scale(1.05);
+    }
+}
+
+
+/* 2-решение
+.removeBTN {
+    background-color: red;
+    padding: 10px;
+} */
