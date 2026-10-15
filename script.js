@@ -22,7 +22,13 @@ function addNewTaskToLS() {
 
     // сохранить данные в Local Storage 
     const oldTasks = JSON.parse(localStorage.getItem('tasks') || '[]')
-    oldTasks.push(todoInputValue)
+    oldTasks.push(
+        {
+            id: Date.now() + Math.random() * 100,
+            text: todoInputValue,
+            status: 'Working'
+        }
+    )
     const updatedTasks = JSON.stringify(oldTasks)
     localStorage.setItem('tasks', updatedTasks)
 
@@ -33,8 +39,15 @@ function addNewTaskToLS() {
 
 function removeTaskToLS(task) {
     const oldTasks = JSON.parse(localStorage.getItem('tasks') || '[]')
-    const updatedTasks = JSON.stringify(oldTasks.filter(t => t !== task))
+    const updatedTasks = JSON.stringify(oldTasks.filter(t => t.id !== task.id))
     localStorage.setItem('tasks', updatedTasks)
+}
+
+function changeTaskStatus(task, newStatus) {
+    const oldTasks = JSON.parse(localStorage.getItem('tasks') || '[]')
+    const taskToUpdate = oldTasks.find(t => t.id === task.id)
+    taskToUpdate.status = newStatus
+    localStorage.setItem('tasks', JSON.stringify(oldTasks))
 }
 
 function render() {
@@ -57,14 +70,47 @@ function render() {
         // Создаем span
         const newSpan = document.createElement('span')
         newLi.append(newSpan)
-        newSpan.innerText = task
+        newSpan.innerText = task.text
+
+        // Создаем span для кнопок status и remove
+        const newSpanBtn = document.createElement('span')
+        newSpanBtn.classList.add('newSpanBtn')
+
+        if (task.status === 'Working') {
+            // Создаем button Working
+            const workingBtn = document.createElement('button')
+            workingBtn.classList.add('workingBtn')
+            workingBtn.innerText = 'Working'
+            workingBtn.type = 'button'
+
+            workingBtn.addEventListener('click', () => {
+                changeTaskStatus(task, 'Done')
+                render()
+            })
+            newSpanBtn.append(workingBtn)
+        }
+        else if (task.status === 'Done') {
+            // Создаем button done
+            const doneBtn = document.createElement('button')
+            doneBtn.classList.add('doneBtn')
+            doneBtn.innerText = 'Done'
+            doneBtn.type = 'button'
+
+            doneBtn.addEventListener('click', () => {
+                changeTaskStatus(task, 'Working')
+                render()
+            })
+            newSpanBtn.append(doneBtn)
+        }
 
         // Создаем button remove
         const removeButton = document.createElement('button')
         removeButton.classList.add('removeBtn')
         removeButton.innerText = 'Remove'
         removeButton.type = 'button'
-        newLi.append(removeButton)
+        newSpanBtn.append(removeButton)
+
+        newLi.appendChild(newSpanBtn)
 
         // Удаление задачи из localStorage
         removeButton.addEventListener('click', () => {
@@ -76,6 +122,8 @@ function render() {
         })
     });
 }
+
+console.log(localStorage)
 
 // 2-решение
 // const removeButton = document.createElement('button')
@@ -144,10 +192,27 @@ function render() {
 // localStorage.setItem('isOk', true)
 // console.log(localStorage.getItem('isOk'))
 
+// в верхнем фильтр выбирает по тексту и может удалить одинаковые задачи
 // const task = ['Поиграть с другом', 'Отвести машину на мойку', 'Заказать продукты']
+
+// в внизу фильтр вибирает по id. безопасный способ
+// const task = [
+//     {
+//         id: 1,
+//         text: 'Поиграть с другом'
+//     }, {
+//         id: 2,
+//         text: 'Отвести машину на мойку',
+//     }, {
+//         id: 3,
+//         text: 'Заказать продукты'
+//     },
+// ]
+
 // const taskJSON = JSON.stringify(task)
 // localStorage.setItem('task', taskJSON)
 // console.log(JSON.parse(localStorage.getItem('task')))
 
-
+// Дата прямо сейчас в милисекундах
+// console.log(Date.now())
 

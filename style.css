@@ -119,8 +119,12 @@ body {
             transform: scale(1);
         }
 
-        .removeBtn {
-            background-color: rgb(250, 4, 4);
+        .newSpanBtn {
+            display: flex;
+            gap: 20px;
+        }
+
+        button {
             color: var(--darkest-color);
             font-size: 1.3rem;
             padding: 10px;
@@ -131,9 +135,31 @@ body {
             transition: background-color 0.2s ease-out, transform 0.2s ease-out;
         }
 
-        .removeBtn:hover {
+        button:hover {
             background-color: var(--turquoise-hover);
             transform: scale(1.05);
+        }
+
+        .doneBtn {
+            background-color: rgb(45, 250, 4);
+        }
+
+        .doneBtn:hover {
+            background-color: rgb(29, 143, 7);
+            transform: scale(1.05);
+        }
+
+        .workingBtn {
+            background-color: rgb(250, 246, 4);
+        }
+
+        .workingBtn:hover {
+            background-color: rgb(131, 129, 2);
+            transform: scale(1.05);
+        }
+
+        .removeBtn {
+            background-color: rgb(250, 4, 4);
         }
     }
 
